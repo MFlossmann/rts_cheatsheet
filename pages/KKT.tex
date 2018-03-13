@@ -1,0 +1,85 @@
+\begin{tcolorbox}[colback=green!5!white,colframe=green!75!black,title=\textbf{Karush-Kuhn-Tucker (KKT) Conditions}]
+	\textbf{Problem:\hspace{1.7cm} Linear: \hspace{1.3cm} Linear-Quadratic:}\\
+\begin{minipage}{0.33\columnwidth}
+	\begin{empheq}[box=\fbox]{align*}
+		\min_w &\ f(w) \\
+		\mathrm{s.t.} &\ g(w)=0 \\
+		&\ h(w) \le 0
+	\end{empheq}
+\end{minipage}%
+\hspace{-.5cm}
+\begin{minipage}{0.35\columnwidth}
+	\begin{empheq}[box=\fbox]{align*}
+		\min_w &\ c^T w \\
+		\mathrm{s.t.} &\ Aw - b =0 \\
+		&\ cw - d \le 0
+	\end{empheq}
+\end{minipage}%
+\hspace{-.5cm}
+\begin{minipage}{0.4\columnwidth}
+	\begin{empheq}[box=\fbox]{align*}
+		\min_w &\ c^T w + \frac{1}{2} w^T B w \\
+		\mathrm{s.t.} &\ Aw - b =0 \\
+		&\ Cw - d \le 0
+	\end{empheq}
+\end{minipage}
+\vspace{.5em}
+	\begin{itemize}
+		\item Feasible set: $\Omega:= \{w\in\mathbb{R}^n|g(w)=0, h(w)\le 0\}$
+		\item Active set at $w\in \Omega$: index $i$ is \emph{active} at $w\Leftrightarrow
+		h_i(w)=0$
+	\end{itemize}
+	\begin{flalign*}
+	\mathcal{A}(w^*):=\{i|i=1,2,...,n_h; \lambda^*_i \ne 0\}\ \mathrm{(``Active\ Set"')}
+\end{flalign*}\\
+	\textbf{\textsc{LaGrangian}}
+	\begin{flalign*}
+		\mathcal{L}(w,\lambda, \mu) = f(w) + \lambda^\top g(w) + \mu^\top h(w)
+	\end{flalign*}
+	\textbf{KKT cond.} %TODO: 2nd KKT
+	\begin{flalign*}
+		\nabla_w\mathcal{L}(w^*,\lambda^*,\mu^*)= \nabla f(w^*) + \nabla g(w^*) \lambda^* + \nabla h(w^*) \mu^* = 0\\
+		\mathrm{Complementary\ conditions}\left\{
+		\begin{array}{r}
+			g(w^*) = 0\\
+			h_i(w^*) \le 0 \\
+			\mu_i^* \ge 0 \\
+			\mu_ih_i(w^*) = 0
+		\end{array}      
+		\right.
+	\end{flalign*}
+		Remarks:
+	\begin{itemize}
+		\item $\nabla_w\mathcal{L}(w^*,\lambda^*)$ for equality constr. only
+		\item $\mu_i\ge 0 \Leftrightarrow$ ``Can't push downhill''
+		\item Complementary conditions are NOT differentiable\\
+	\end{itemize}
+
+	\textbf{Second order optimality conditions}\\
+	For $w^*$ local min, $Z^\top Z=I, \frac{\partial \tilde{g}}{\partial w}(w^*)Z=0$, and
+	\begin{flalign*}
+		\tilde{g}(w)=
+		\begin{bmatrix}
+			g(w) \\ h_i(w^*), i\in \mathcal{A}(w^*)
+		\end{bmatrix}
+	\end{flalign*}
+	\begin{itemize}
+		\item   \textbf{SONC}: $ Z^\top
+		\nabla_w^2\mathcal{L}(w^*,\lambda^*, \mu^*)Z
+		\succcurlyeq 0$
+		\item  \textbf{SOSC}: $ \underbrace{Z^\top
+		\nabla_w^2\mathcal{L}(w^*,\lambda^*, \mu^*)Z}_{\text{reduced Hessian}}\succ 0$
+		\begin{itemize}
+			\item[$\Rightarrow$] KKT matrix is invertible
+			\item[$\Rightarrow$] solution is stable against perurubations\\
+		\end{itemize}
+	\end{itemize}
+
+	\textbf{Strict complementarity}, iff all active constraints are strictly active
+	\begin{flalign*}
+		h_i(w^*) = 0 \text{ and } \mu_i(w^*) = 0 \Rightarrow \text{constraint is weakly active}\\
+		h_i(w^*) = 0 \text{ and } \mu_i(w^*) > 0 \Rightarrow \text{constraint is strictly active}\\
+	\end{flalign*}
+
+
+\end{tcolorbox}

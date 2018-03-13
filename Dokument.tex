@@ -1,0 +1,372 @@
+% Projekt: Real-Time-Systems Formelsammlung
+% Autor: Julian Dinter
+% Datum: 30.01.2018
+% Copyrigth: Julian Dinter
+
+%!TEX root = ./HelpSheet.tex
+
+\begin{tcolorbox}[colback=kapiteleins!5!white, colframe=blue!75!black, title=\textbf{Duration Calculus}, left=0mm, right=0mm, top=0mm, bottom=0mm]
+	\begin{description}[leftmargin=!, labelwidth=2cm]
+	\item[\uline{1. Symbols :}] $true, false, =, <, >, \leq, \geq, \quad f, g, \quad X,Y,Z, \quad x,y, z $
+	\item[1.1 Predicate Symbols:] $true, false, =, <, >, \leq, \geq$ \hfill $\mathbb{R}^n \rightarrow \mathbb{B}$
+	\item[1.2 Function Symbols:] $+, -$ \hfill $\mathbb{R}^n \rightarrow \mathbb{R}$
+	\item[1.3 State variables and Domain values:] State variable $X \rightarrow \mathcal{D}(X) = \{d_1, \ldots, d_n\}$\\
+	$\mathcal{I} : Obs \rightarrow (\text{Time} \rightarrow \mathcal{D})$\\
+	$\mathcal{I}(X): \text{Time} \rightarrow \mathcal{D}(X)$\\
+	$\mathcal{I}(X)(t) \in \mathcal{D}(X)$ denotes value $X$ has at time $t \in$ Time
+	\item[1.4 Global Variables:] $x,y,z \hfill \mathcal{V} :$ GVar $\rightarrow \mathbb{R}$\\
+	
+	\item[\uline{2. State Assertions:}] $P \Coloneqq 0 \, \vert \, 1 \, \vert \, X = d \, \vert \, \lnot P_1 \, \vert \, P_1  \land  P_2 $
+	\item[2.1 Semnatics:] $\mathcal{I} \llbracket P \rrbracket : \text{Time} \rightarrow \{0, 1\}$\\
+    $ \underbrace{\mathcal{I} \llbracket X \rrbracket}_{\mathrm{only\ if\
+      boolean\ }X} (t) = \mathcal{I} \llbracket X = 1 \rrbracket (t) = \mathcal{I}(X)(t) = X_{\mathcal{I}}(t)$\\
+	
+	\item[\uline{3.Terms:}] $ \theta \Coloneqq x \, \vert \, \ell \, \vert \, \int
+    P \, \vert \, f\left(\theta_1, \ldots, \theta_n \right)$ \hfill $\theta_1 +
+    \theta_2 \widehat{=} $+$(\theta_1, \theta_2)$\\
+    Rigid Term: no $l$, nor $\int$ operators
+	\item[3.1 Semantics] $\mathcal{I} \llbracket \theta \rrbracket : \text{Val} \times \text{Intv} \rightarrow \mathbb{R}$\\
+	$\mathcal{I} \llbracket \theta \rrbracket (\mathcal{V}, [b, e])$\\
+	
+	\item[\uline{4. Formulae:}] $ F \Coloneqq p(\theta_1, \ldots, \theta_n \, \vert \, \lnot F_1 \, \vert \, F_1 \land F_2 \, \vert \, \forall x \bullet F_1 \, \vert \, F_1 ; F_ 2 $
+	\item[4.1 Semantics:] $\mathcal{I} \llbracket F \rrbracket : \text{Val} \times \text{Intv} \rightarrow \{$tt, ff$\}$\\
+	
+	\item[\uline{5. Abbreviations:}]\begin{flalign*}
+	&\dc{} \coloneqq l = 0 \hfill &&\dc{P} \coloneqq \smallint P = l \land l > 0\\
+	&\dc{P}^t \coloneqq \dc{P} \land l = t \hfill &&\dc{P}^{\leq t} \coloneqq \dc{P} \land l \leq t\\
+	&\Diamond F \coloneqq true; F; true \hfill  &&\Box F = \lnot \Diamond \lnot F
+	\end{flalign*}
+	
+	\item[\uline{6. Priority Groups:}] $\lnot, \quad ;, \quad \land \, \lor, \quad \Longrightarrow \, \Longleftrightarrow, \quad \forall \, \exists$\\
+	
+	\item[\uline{7. Laws of the DC Integral operator:}] $\models \left( \left( \int P = r_1 \right) ; \left( \int P = r_2 \right) \right) \Rightarrow \int P = \left( r_1 + r_2 \right)$\\
+	$\models \dc{\lnot P} \Rightarrow \int P = 0$ \hfill $\models \int P \leq l$ \hfill $\models \dc{} \Rightarrow \int P = 0$
+	\end{description}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=kapiteleins!5!white, colframe=blue!75!black, title=\textbf{3. Terms -- Info}, left=0mm, right=0mm, top=0mm, bottom=0mm]
+$\mathcal{V}(x) = 20 \quad \theta = x \cdot \int L \quad [b, e] = [0.5, 3.25]$\\
+$\Rightarrow \mathcal{I} \llbracket \theta \rrbracket \left(\mathcal{V}, [0.5,
+  3.25]\right) =
+\mathcal{I} \llbracket x \cdot \int L \rrbracket \left(\mathcal{V}, [0.5,
+  3.25]\right) =
+\mathcal{I} \llbracket \hat{\cdot}(x, \int L) \rrbracket\left(\mathcal{V}, [0.5, 3.25]\right) = \hat{\cdot} \, \left(\mathcal{I} \llbracket x \rrbracket\left(\mathcal{V}, [0.5, 3.25]\right), \mathcal{I} \llbracket \int L \rrbracket\left(\mathcal{V}, [0.5, 3.25]\right) \right) = \hat{\cdot} \left( \mathcal{V}(x), \mathcal{I} \llbracket x \rrbracket\left(\mathcal{V}, [0.5, 3.25] \right) \right) = \hat{\cdot} \left( 20, \int_{0.5}^{3.25} L_{\mathcal{I}}(t) \, \mathrm{dt} \right) = \hat{\cdot} \left(20, 1.25\right) = 20 \cdot 1.25 = 25$
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=kapiteleins!5!white, colframe=green!75!black, title=\textbf{Decidability Results for DC}, left=0mm, right=0mm, top=0mm, bottom=0mm]
+\resizebox{0.5\textwidth}{!}{
+\begin{tabular}{l|cc}
+& Discrete Time & Continuous Time\\ \hline
+RDC & \textcolor{green}{1. decidable} & decidable \\
+RDC $+ \, \ell = r$ & decidable for $r \in \mathbb{N}$ & undecidable for $r \in \mathbb{R}^+$\\
+RDC $+ \, \int P_1 = \int P_2$ & undecidable& undecidable \\
+RDC $+ \, \ell = x, \forall x$ & undecidable & \textcolor{red}{2. undecidable} \\
+DC & undecidable & undecidable
+\end{tabular}
+}
+\resizebox{0.5\textwidth}{!}{
+\begin{tabular}{l|cc}
+& Discrete Time & Continuous Time\\ \hline
+$\models^? \left(\dc{P} ; \dc{P}\right)$ & \multirow{2}{*}{Yes} & Yes, \\
+$\Longrightarrow \dc{P}$ & & smallest $e-b = 2$ \\ \hline
+$\models^? \dc{P} \Longrightarrow$ & \multirow{2}{*}{Yes} & No, \\
+$\left( \dc{P} ; \dc{P} \right)$ & & smallest $e-b = 1$
+\end{tabular}
+}
+\\
+\begin{description}[leftmargin=!, labelwidth=1cm]
+\item[\uline{RDC in Discrete Time:}] $F \Coloneqq \dc{P} \, \vert \, \lnot F_1 \, \vert \, F_1 \lor F_2 \, \vert \, F_1 ; F_2$,\\
+where $P$ is a state assertion with boolean observables only\\
+\item[Idea:] Give a procedure to construct a formula $F$,\\a regular language $\mathcal{L}(F)$,\\such that $\mathcal{I} [0, n] \models F$\\iff $w \in \mathcal{L}(F)$, where $w$ describes $\mathcal{I}$ on $[0, n]$.
+\item Then $F$ is satisfiable in discrete time iff $\mathcal{L}(F)$ is not empty\\
+$\Rightarrow$ Emptyness problems are decidable for regular languages
+\item \begin{flalign*}\Sigma (F) =&\{ \left(X \land Y \land Z\right), \left(X \land Y \land \lnot Z\right), \left(X \land \lnot Y \land Z\right),\\
+&\left(X \land \lnot Y \land \lnot Z\right), \left(\lnot X \land Y \land Z\right), \left(\lnot X, \land Y \land \lnot Z\right),\\
+&\left(\lnot X \land \lnot Y \land Z\right), \left(\lnot X \land \lnot Y \land \lnot Z\right)\}
+\end{flalign*}
+\item[Disjunctive Normal Form\,(DNF):]\hfill\\
+$P = \left( X \land \lnot Y\right) \Longleftrightarrow P = \left(X \land \lnot Y \land Z \right) \lor \left(X \land \lnot Y \land \lnot Z \right)$
+\end{description}
+\begin{description}[leftmargin=!, labelwidth=1cm]
+\item[\uline{RDC $+ \, \ell = x, \forall x$ in Continuous Time:}] \hfill \newline $F \Coloneqq \dc{P} \, \vert \, \lnot F_1 \, \vert \, F_1 \lor F_2 \, \vert \, F_1 ; F_2 \, \vert \, \ell = 1 \, \vert \, \ell = x \, \vert \, \forall x \bullet F_1$\\
+
+\item[Idea:] Reduce divergence of two counter-machines to realisability from 0.\\
+$\mathcal{M} = (Q, q_0, q_{fin}, Prog)$\\
+The (!) computation of $\mathcal{M}$ is a finite sequence of the form\\
+$K_0 = (q_0, 0, 0) \vdash K_1 \vdash K_2 \ldots \vdash (q_{fin}, n_1, n_2)$\\
+or an infinite sequence of the form\\
+$K_0 = (q_0, 0, 0) \vdash K_1 \vdash K_2 \ldots$
+\item A single configuration $K$ of $\mathcal{M}$ can be encoded in an interval of length $4$\\
+\item Being an encoding interval can be characterised by a DC formula
+\item Being an encoding of the run can be characterised by a DC Formula $\mathcal{F}(\mathcal{M})$
+\item Then $\mathcal{M}$ diverges \hfill iff $\mathcal{F}(\mathcal{M}) \land \lnot \Diamond \dc{q_{fin}}$ is realisable from $0$.
+\end{description}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=kapiteleins!5!white, colframe=yellow!75!black, title=\textbf{DC Standard Forms}, left=0mm, right=0mm, top=0mm, bottom=0mm]
+\begin{description}
+\item[Followed-By:] $F \longrightarrow \dc{P} \Longleftrightarrow \lnot \Diamond \left( F ; \dc{\lnot P} \right) \Longleftrightarrow \Box \lnot \left( F; \dc{\lnot P} \right)$\\
+$\forall x \bullet \Box \left(\left ( F \land l = x \right) ; \ell > 0 \right) \Longrightarrow \left(\left( F \land l = x \right) ; \dc{P} ; true \right)$\\
+\begin{center}
+%\includegraphics[keepaspectratio=true, width=0.7\textwidth]{./Dokumente/1}
+\end{center}
+\item[(Timed) leads to:] $ F \xrightarrow{\theta} \dc{P} : \Leftrightarrow \left(F \land \ell = \theta\right) \rightarrow \dc{P}$
+\begin{center}
+%\includegraphics[keepaspectratio=true, width=0.7\textwidth]{./Dokumente/1}
+\end{center}
+\item[(Timed) up to:] $F \xrightarrow{\leq \theta} \dc{P} : \Leftrightarrow \left(F \land \ell \leq \theta\right) \rightarrow \dc{P}$
+\begin{center}
+%\includegraphics[keepaspectratio=true, width=0.7\textwidth]{./Dokumente/1}
+\end{center}
+\item[Followed-by-initially:] $F \xrightarrow[0]{} \dc{P} : \Longleftrightarrow \lnot \left(F ; \dc{\lnot P}\right)$
+\begin{center}
+%\includegraphics[keepaspectratio=true, width=0.7\textwidth]{./Dokumente/1}
+\end{center}
+\item[(Timed) up-to-initally:] $F \xrightarrow{\leq \theta}_0 \dc{P} : \Longleftrightarrow \left(F \land l \leq \theta \right) \longrightarrow_0 \dc{P}$
+\begin{center}
+%\includegraphics[keepaspectratio=true, width=0.7\textwidth]{./Dokumente/1}
+\end{center}
+\item[Initialisation:] $\dc{} \lor \dc{P} ; true$
+\begin{center}
+%\includegraphics[keepaspectratio=true, width=0.7\textwidth]{./Dokumente/1}
+\end{center}
+\end{description}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=kapiteleins!5!white, colframe=orange!75!black, title=\textbf{DC Implementables}, left=0mm, right=0mm, top=0mm, bottom=0mm]
+\begin{description}
+\item[1. Initialisation:] $\dc{} \lor \dc{\pi} ; true$\\Initially, the control automaton is in phase $\pi$.
+\item[2. Sequencing:] $\dc{\pi} \longrightarrow \dc{\pi \lor \pi_1 \lor \ldots \lor \pi_n}$\\When the control automaton is in $\pi$, it subsequently stays in $\pi$ or moves to one of $\pi_1, \ldots, \pi_n$.
+\item[3. Progress:] $\dc{\pi} \xrightarrow{\theta} \dc{\lnot \pi}$\\After the control automaton stayed in phase $\pi$ for $\theta$ time units, it subsequently leaves this phase, thus progress
+\item[4. Synchronisation:] $\dc{\pi \land \varphi} \xrightarrow{\theta} \dc{\lnot \pi}$\\After the control automation stayed for $\theta$ time units in phase $\pi$ with the condition $\varphi$ being true, it subsequently leaves this phase.
+\item[5. Bounded stability:] $\dc{\lnot \pi} ; \dc{\pi \land \varphi} \xrightarrow{\leq \theta} \dc{\pi \lor \pi_1 \lor \ldots \lor \pi_n}$\\If the control automaton
+\item[6. Unbound stability:]$\dc{\lnot \pi} ; \dc{\pi \land \varphi} \longrightarrow \dc{\pi \lor \pi_1 \lor \ldots \lor \pi_n}$\\If the control automaton
+\item[7. Bounded inital stability:] $\dc{\pi \land \varphi} \xrightarrow{\leq \theta}_0 \dc{\pi \lor \pi_1 \lor \ldots \lor \pi_n}$\\If the control automaton
+\item[8. Unbounded inital stability:] $\dc{\pi \land \varphi} \longrightarrow_0 \dc{\pi \lor \pi_1 \lor \ldots \lor \pi_n}$\\If the control automaton
+\vspace{0.2cm}
+\hrule
+\vspace{0.2cm}
+\item Difference between $ABC$\\
+A\\B\\C\\D\\E\\F\\HIER NOCH IRGENDWAS ZU DC IMPLEMENTABLES
+\end{description}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=kapiteleins!5!white, colframe=orange!75!black, title=\textbf{Timed Automaton $\mathcal{A} = (L, B, X, I, E, \ell_{ini})$ \hfill Edges $E=$ ($\ell$, $\alpha$, $\varphi$, $Y$, $\ell'$)}, left=0mm, right=0mm, top=0mm, bottom=0mm]
+\begin{description}[leftmargin=2.25cm, labelwidth=1.5cm]
+\item [Locations:] $L =$\{off, light, bright\}
+\item[Alphabet:] $B =$ \{press\}
+\item[Clocks:] $X =$ \{x\}
+\item[Invariants:] $I =$ \{off $\mapsto$ true, light $\mapsto$ true, bright $\mapsto$ true\}
+\item[Edges:] $E =$ \{(off, press?, true, \{x\}, light), (light, press?, $x>0$, $\emptyset$, off),\\(light, press?, x$\leq$3, $\emptyset$, bright), (bright, press?, true, $\emptyset$, off)\}
+\item[Inital location:] $\ell_{ini} = $ off
+\end{description}
+
+\begin{description}
+\item[\uline{1. Clock Constraints:}] $\varphi \Coloneqq x \sim c~|~x - y \sim c~|~\varphi_1 \land \varphi_2$
+
+\item[\uline{2. Clock Valuations:}] \mbox{$\mathcal{V}: X \rightarrow$ Time, assigning each clock $x \in X$ the current time $\nu(x)$}
+\item[2.1 Time Shift:] $(\nu + t)(x) = \nu(x) + t$\\
+$\mathcal{V} : \{x \mapsto 3.0\} \Rightarrow (\mathcal{V} + 0.27) = \nu(x) + 0.27 = 3.0 + 0.27 = 3.27$
+\item[2.2 Modification + Update:] $\left( \mathcal{V} \left[Y \coloneqq t \right] \right) = \begin{cases}
+t, &\text{\,if\,} x \in Y\\
+\nu(x), &\text{\,otherwise}
+\end{cases}$
+\vrule \hfill Reset\,$\Rightarrow t = 0$
+\vspace{-0.2cm}
+\item[\uline{3. Transitions:}]
+\item[3.1 Time or Delay Transition:] $\langle \ell, \nu \rangle \xrightarrow{t} \langle \ell, \nu + t \rangle$ \hfill iff $\forall t \in \text{Time} : \nu + t \models I(\ell)$\\
+Some Time elapses respecting invariants, locations unchanged
+\item[3.2 Action or Discrete Transition:] \mbox{$\langle \ell, \nu \rangle \xrightarrow{\alpha} \langle \ell', \nu' \rangle$\hfill iff $\nu \models \varphi, \nu' = \nu \left[ Y \coloneqq 0 \right], \nu' \models I(\ell')$}\\
+An Action occurs, location, clocks may change\,/\,reset, time does not elapse
+\item[3.3 Transition Sequences:] $\langle \ell_0, \nu_0 \rangle \xrightarrow{\lambda_1} \langle \ell_1, \nu_1 \rangle \xrightarrow{\lambda_2} \ldots $ with $\langle \ell_0, \nu_0 \rangle \in C_{ini}$\\
+$\lambda \in B \lor \lambda \in$ Time\\[-0.1cm]
+\item[\uline{4. Reachability:}] A configuration $\langle \ell, \nu \rangle$ is called reachable\,(in $\mathcal{A}$),\\
+iff there is a transition sequence of the form:\\
+$\langle \ell_0, \nu_0 \rangle \xrightarrow{\lambda_1} \langle \ell_1, \nu_1 \rangle \xrightarrow{\lambda_2} \langle \ell_2, \nu_2 \rangle \xrightarrow{\lambda_3} \ldots \xrightarrow{\lambda_n} \langle \ell_n, \nu_n \rangle = \langle \ell, \nu \rangle$\\[-0.1cm]
+
+\item[\uline{5. Time Stamped Configurations:}] $\langle \ell, \nu \rangle, t$ is a timed-stamped configuration\\[-0.1cm]
+\item[5.1 Time Stamped Delay Transition:] \hfill \\[-0.1cm]
+$\langle \ell, \nu \rangle, t \xrightarrow{t'} \langle \ell, \nu + t' \rangle, t + t'$ \hfill iff $t' \in$ Time and $\langle \ell, \nu \rangle, t \xrightarrow{t'} \langle \ell, \nu + t'\rangle$
+\item[5.2 Time Stamped Action Transition:] \hfill \\[-0.025cm]
+$\langle \ell, \nu \rangle, t \xrightarrow{\alpha} \langle \ell', \nu' \rangle, t$ \hfill iff $ \alpha \in B_{?!}$ and $ \langle \ell, \nu \rangle, t \xrightarrow{\alpha} \langle \ell', \nu' \rangle$\\
+
+\item[\uline{6. Computation Path:} ($=$Sequence of time-stamped configurations)]\hfill \newline
+$\xi =  \langle \ell_0, \nu_0 \rangle \xrightarrow{\lambda_1} \langle \ell_1, \nu_1 \rangle \xrightarrow{\lambda_2} \ldots$ starting in $\langle \ell_0, \nu_0 \rangle$, with $\langle \ell_0, \nu_0 \rangle \in C_{ini}$
+
+\item[\uline{7. Time Locks and Zeno-Behaviour:}]\hfill
+\resizebox{5cm}{!}{
+\parbox{\textwidth}{
+\begin{tikzpicture}[->, >=stealth', shorten >=1pt, auto, node distance=1cm, thick, every initial by arrow/.style={*->}, initial distance=0.75cm, initial text={}]
+\node[initial, state, align = center] at (0,0) (A) {$\ell$\\$x\leq2$};
+\node[initial, state, align = center] at (2.5, 0) (B) {$\ell'$\\$x\leq3$};
+\path (B) edge [loop right] node {$a?$} (B); 
+\end{tikzpicture}
+}}
+$\langle \ell, x=0 \rangle, 0 \xrightarrow{2} \langle \ell, x=2 \rangle, 2$ \newline
+$\langle \ell, x=0 \rangle, 0 \xrightarrow{0.1} \langle \ell, x=0.1 \rangle, 0.1 \xrightarrow{0.01} \langle \ell, x=0.11 \rangle, 0.11 \xrightarrow{0.001} \ldots$ \newline
+A Configuration $\langle \ell, \nu \rangle$ is called timelock, iff no delay transition with $t>0$ from $\langle \ell, \nu \rangle$ is possible\,(or any location change possible due to Invariant of location $+$ guard of edge/transition)\\
+$\langle \ell, x=0 \rangle, 0 \xrightarrow{\frac{1}{2}} \langle \ell, x=\frac{1}{2} \rangle, \frac{1}{2} \xrightarrow{\frac{1}{4}} \ldots \xrightarrow{\frac{1}{2^n}} \langle \ell, x= \frac{2^n - 1}{2^n} \rangle, \frac{2^n - 1}{2^n}$
+
+\item[\uline{8. Real-Time Sequence:}] $t_0, t_1, t_2, \ldots, t_i \in$ Time for $i \in \mathbb{N}_0$\\
+is called Real-Time Sequence iff it has the following properties:
+\item[8.1 Monotonicity:] $\forall i \in \mathbb{N}_0: t_i \leq t_{i+1}$
+\item[8.2 Non-Zeno Behaviour:] $\forall t \in$ Time, $\exists i \in \mathbb{N}_0 : t < t_i$\\
+
+\item[\uline{9. Run:}] Starting in $\langle \ell, \nu \rangle, t_0$, a run is an infinite computation path, where ${t_{i}}_{i \in \mathbb{N}_0}$ is a Real-Time Sequence. \hfill $\left( \xi =\right.$ run of $\mathcal{A}$ \hfill iff $\xi =$ computation path of $\left. \mathcal{A}\right)$
+%\item[\uline{General Info:}]\hfill \newline
+%Transition Sequence: Without Timestamps\\
+%Computation Path: With Timestamps\\
+%Run: Timestamps form a Real-Time Sequence
+\end{description}
+\end{tcolorbox}
+
+
+\begin{tcolorbox}[colback=kapiteleins!5!white, colframe=orange!75!black, title=\textbf{Networks of Timed Automata}, left=0mm, right=0mm, top=0mm, bottom=0mm]
+\begin{description}
+\item[\uline{1. Handshake Edges:}] $(\ell_1, \alpha, \varphi_1, Y_1, \ell_1') \in E_1$ \hfill $(\ell_2, \alpha, \varphi_2, Y_2, \ell_2') \in E_2$
+\vspace{-0.2cm}
+\begin{center}
+$\left( (\ell_1, \ell_2), \tau, \varphi_1 \land \varphi_2, Y_1 \cup Y_2, (\ell_1', \ell_2') \right) \in E$
+\end{center}\vspace{-0.4cm}
+\item[\uline{2. Asynchronous Edges:}] \hfill \newline
+If $(\ell_1, \alpha, \varphi_1, Y_1, \ell_1') \in E_1$ then $\forall. \ell_2 \in E_2 \bullet \left( (\ell_1, \ell_2), \alpha, \varphi, Y_1, (\ell_1', \ell_2) \right) \in E$\\
+If $(\ell_2, \alpha, \varphi_2, Y_2, \ell_2') \in E_2$ then $\forall. \ell_1 \in E_1 \bullet \left( (\ell_1, \ell_2), \alpha, \varphi, Y_2, (\ell_1, \ell_2') \right) \in E$
+
+\item[\uline{3. Channel Hiding:} (Introduces local channels)] \hfill \newline
+$(\ell, \alpha, \varphi, Y, \ell') \in E'$ \hfill iff $(\ell, \alpha, \varphi, Y, \ell') \in E ~ \land ~ \alpha \notin \{press!, press?\}$
+
+\item[\uline{4. Closed Networks:}] Hiding all channel transitions of given channel\\
+$\Rightarrow$ Transitions are thus either internal actions $\tau$ or delay transitions\,(Hiding all channel yields a closed network)
+\item[\uline{5. Operational Semantics of Networks:}]\hfill \\[-0.25cm]
+\end{description}
+\begin{minipage}[t]{0.5\textwidth}
+\emph{5.1 Local Transitions:}\\
+$\langle \vec{\ell}, \nu \rangle \xrightarrow{\alpha} \langle \vec{\ell}', \nu \rangle$\\
+if there is an $i \in \{1, \ldots, n\}$ such that\\
+$\left( \ell_i, \alpha, \varphi, Y, \ell_i \right) \in E, \quad \alpha \in B_{?!}$\\
+$\nu \models \varphi$\\
+$\vec{\ell}_i ' = \vec{\ell} \left[ \ell_i \coloneqq \ell_i ' \right]$\\
+$\nu' = \nu \left[ Y \coloneqq 0 \right]$\\
+$\nu' \models I(\ell_i')$
+\begin{description}
+\item[5.3 Delay Transitions:] $\langle \vec{\ell}, \nu \rangle \xrightarrow{t} \langle \vec{\ell}, \nu + t\rangle$
+\end{description}
+if $\forall t \in [0, t]$ \qquad $\nu + t' \models \bigwedge_{k=1}^n I_k(\ell_k)$
+
+\end{minipage}
+\vrule
+\hspace{0.2cm}
+\begin{minipage}[t]{0.45\textwidth}
+\emph{5.2 Synchronisation Transition:}\\
+$\langle \vec{\ell}, \nu \rangle \xrightarrow{\tau} \langle \vec{\ell}', \nu \rangle$
+\\if there are $i,j \in \{1, \ldots, n\}, i \neq j$ and $ b \in B_i \cup B_j$, such that\\
+$\left( \ell_i, b!, \varphi_i, Y_i, \ell_i' \right) \in E_i$\\
+$\left( \ell_j, b?, \varphi_j, Y, \ell_j \right) \in E_j$\\
+$\nu \models \varphi_i \land \varphi_j$\\
+$\vec{\ell}_i ' = \vec{\ell} [ \ell_i \coloneqq \ell_i '] [ \ell_j \coloneqq \ell_j ' ]$\\
+$\nu' = \nu \left[ Y_i \cup Y_j \coloneqq 0 \right]$\\
+$\nu' \models I(\ell_i') \land I(\ell_j')$
+\end{minipage}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=kapiteleins!5!white, colframe=orange!75!black, title=\textbf{Location Reachability / The Region Automata}, left=0mm, right=0mm, top=0mm, bottom=0mm]
+\begin{description}
+\item[Given:] A timed automata $\mathcal{A}$ and one of its location $\ell$
+\item[Question:] Is $\ell$ reachable?\\That is, if there is a transition sequence of the form\\$\langle \ell_{ini}, \nu_0 \rangle \xrightarrow{\lambda_1} \langle \ell_1, \nu_1 \rangle \xrightarrow{\lambda_2} \langle \ell_2, \nu_2 \rangle \xrightarrow{\lambda_3} \ldots \xrightarrow{\lambda_n} \langle \ell_n, \nu_n \rangle$\\[0.1cm]
+with $\ell_n = \ell$ is the labelled transition system.\\
+
+\item[Note:] Decidability is not soo obvious:\\
+Clocks range over real numbers, thus infinitely many configurations\\
+At each configurations uncountably many transitions $\xrightarrow{t}$ may originate\\
+
+\item[Recall:] $\varphi \coloneqq x \sim c \, \vert \, x-y \sim c \, \vert \, \varphi \land \varphi \hfill x,y \in X, ~ c \in \mathbb{Q}_0^+$, and $\sim \in \{<,>, \leq, \geq\}$\\
+
+\item[\uline{1. Observe clock constraints:}] Let $t_{\mathcal{A}}$ be the least common multiple of the denominators in $C(\mathcal{A})$.
+A location is reachable in $t_{\mathcal{A}} \cdot \mathcal{A}$ \hfill iff $\ell$ is reachable in $\mathcal{A}$\\
+
+\item[\uline{2. Time abstract Transition System $\mathcal{U}(\mathcal{A})$:}] \hfill \newline
+Let $\langle \ell, \nu \rangle, \langle \ell, \nu \rangle \in$ Conf($\mathcal{A})$ be configurations of $\mathcal{A}$ and $\alpha \in B_{?!}$, an action,\\
+\mbox{then $\langle \ell, \nu \rangle \xRightarrow{\alpha} \langle \ell', \nu' \rangle$ iff there exists $t \in$ Time, such that $\langle \ell, \nu \rangle \xrightarrow{t} \circ \xrightarrow{\alpha} \langle \ell', \nu' \rangle$}\\
+
+\item[\uline{3. Region Automaton $\mathcal{R}(\mathcal{A})$:}] \hfill \newline
+Distinguish Clock valuations: if $c_x \geq 1$ then there are $(2 c_x + 2)$ equivalence classes: \hfill $\{\{0\}, (0,1), \{1\}, (1,2), \{2\}, \ldots, \{c_x\}, (c_x, \infty)\}.$\\
+If $\nu_1(x)$ and $\nu_2(x)$ are in the same equivalence class, then $\nu_1$ and $\nu_2$ are indistinguishable by $\mathcal{A}$.\\
+$\mathcal{R}(\mathcal{A}) = $ Conf$\left( \mathcal{R}(\mathcal{A}), B_{?!}, \left\{ \xRightarrow{\alpha}_{\mathcal{R}(\mathcal{A})} \vert \alpha \in B_{?!} \right\}, C_{ini} \right)$\\
+where Conf$\left( \mathcal{R}(\mathcal{A}) \right) = \{ \langle \ell, [\nu] \rangle , \ell \in L, \nu : X \rightarrow$ Time, $\nu \models I(\ell)\}$\\
+\mbox{$\alpha \in B_{?!}: \langle \ell, [\nu] \rangle \xRightarrow{\alpha}_{\mathcal{R}(\mathcal{A})} \langle \ell', [\nu'] \rangle$\hfill iff $\langle \ell, \nu \rangle \xRightarrow{\alpha} \langle \ell', \nu' \rangle \hfill \left(\widehat{=} \langle \ell, \nu \rangle \xRightarrow{t} \circ \xRightarrow{\alpha} \langle \ell', \nu' \rangle \right)$}
+
+\item[\uline{4. The number of Regions:}] \mbox{$2 \left( c + 2 \right)^{\vert X \vert} \cdot \left( 4c + 3 \right)^{\frac{1}{2} \vert X \vert \cdot \left( \vert X \vert - 1 \right)}$ $=$ upper bound number of regions}
+\item[\uline{Putting all together}] $\mathcal{A} = \left( L, B, X, I, E, \ell_{ini} \right)$\\
+There are finitely many locations in $L$\,(By definition)\\
+There are finitely many regions\\
+$\Rightarrow$ So Conf$\left( \mathcal{R}(\mathcal{A}) \right)$ is finite\,(By construction)\\
+It is decideable whether there exists a sequence\\
+$\langle \ell_{ini}, [\nu_{ini}] \rangle \xRightarrow{\alpha}_{\mathcal{R}(\mathcal{A})} \langle \ell_1, [\nu_1] \rangle \xRightarrow{\alpha}_{\mathcal{R}(\mathcal{A})} \ldots \xRightarrow{\alpha}_{\mathcal{R}(\mathcal{A})} \langle \ell_n, [\nu_n] \rangle$,\\
+such that $\langle \ell_n, [\nu_n] \rangle = \langle \ell, [\nu] \rangle$
+\item[Note:] We just observed that $\mathcal{R}(\mathcal{A})$ loses some information about the clock valuations that are possible in a region.
+\end{description}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=kapiteleins!5!white, colframe=orange!75!black, title=\textbf{Region and Zones}, left=0mm, right=0mm, top=0mm, bottom=0mm]
+\begin{description}
+\item A (clock) zone is a set z $\subseteq (X \rightarrow \text{Time})$ of valuations of clocks $X$ such that there exists $\varphi \in \Phi(X)$ with $\nu \in z$ iff $\nu \models \varphi$.
+\item[1. Let time elapse]
+\item[2. Intersect with Invariant of $\ell$]
+\item[3. Intersect with guard]
+\item[4. Reset clocks]
+\item[5. Intersect with Invariant of $\ell'$]
+\item[\uline{Pro's and Con's:}]
+\item[Zone-based:] $+$ avoids blowup by number of clocks and size of clock constraints through symbolic representation of clocks
+$-$ confinde wrt. size of discrete state space
+\item[Region-based:] $+$ Less dependent on size of discrete state space
+$-$ exponential in number of clocks
+\end{description}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=kapiteleins!5!white, colframe=orange!75!black, title=\textbf{Extended Timed Automata $\mathcal{A} = (L, C, B, U, X, V, I, E, \ell_{ini})$ \hfill Edges $E=$ ($\ell, \alpha, \varphi, \vec{r}, \ell'$)}, left=0mm, right=0mm, top=0mm, bottom=0mm]
+\begin{description}
+\item[Comitted Locations:] $C \subseteq L$
+\item[Urgend Channels:] $U \subseteq B$
+\item[Set of Datavariables:] $\mathcal{V}$
+\item[Urgend:] Being in this location\,(no time can pass) blocks time passing
+\item[Committed:] Being in this location the next edge must change the committed location
+\item[\uline{1. Data Variables:}] When modelling controllers as timed automata, it is sometimes desirable to have\,(local and shared) non-clock variables. E.g, number of open doors
+\item[\uline{2. Urgent Locations:}] Enforce local immediate progress\,(In $t=0$ time)
+\item[\uline{3. Committed Locations:}] Enforce atomic immediate progress\,(Direct)
+As long as data variables are finite the extension doesn't harm the decidability
+\end{description}
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=kapiteleins!5!white, colframe=orange!75!black, title=\textbf{Automatic Verification of DC Properties for Timed Automata}, left=0mm, right=0mm, top=0mm, bottom=0mm]
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=kapiteleins!5!white, colframe=orange!75!black, title=\textbf{Testability}, left=0mm, right=0mm, top=0mm, bottom=0mm]
+
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[colback=kapiteleins!5!white, colframe=orange!75!black, title=\textbf{Timed Büchi Automata $\mathcal{A} = \left( \Sigma, S, S_0, X, E, F \right)$}, left=0mm, right=0mm, top=0mm, bottom=0mm]
+\begin{description}
+\item[Alphabet:] $\Sigma$
+\item[Finite Set of States:] $S$
+\item[Set of Start States:] $S_0 \leq S$
+\item[Finite Set of Clocks:] $X$
+\item[Set of Transitions:] $E = \left( s, s', a, \lambda, \delta \right)$
+\item[Set of Acceptig States:] $F$
+\item[\uline{1. Time sequence:}] $\tau = \tau_1, \tau_2, \ldots$ is an infinite sequence of time values $\tau_i \in\mathbb{R}_0^+$, satisfying the following constraints:
+\item[Monotonicity:] $\tau$ increases strictly monotonically, i.e., $\tau_i < \tau_{i+1} \forall i \geq 1$
+\item[Progress:] For every $t \in \mathbb{R}_0^+$, there is some $i \geq 1$ such that $\tau_i > t$
+\item[\uline{2. Timed Word:}] is a pair $(\sigma, \tau)$ over a an alphabet $\Sigma$, where $\sigma = \sigma_1, \sigma_2, \ldots \in \Sigma^\omega$ is an infinite word over $\Sigma$ and $\tau$ is a time sequence
+\item[\uline{3. Timed Language:}] is a set of timed words over $\Sigma$ over an alphabet $\Sigma$
+\item[\uline{4. Clock constraints:}] $\delta \Coloneqq x \leq c \, \vert \, c \leq x \, \vert \, \lnot \delta \, \vert \, \delta_1 \land \delta_2$
+\item[\uline{5. (Accepting) TBA Run:}] A run $r$, denoted by $\left( \bar{s}, \bar{v} \right)$ of a TBA over a timed word $\ \left( \sigma, \tau \right)$ is an infinite sequence $r: \langle s_o, \nu_0 \rangle \xrightarrow[\tau_1]{\sigma_1} \langle s_1, \nu_1 \rangle \xrightarrow[\tau_2]{\sigma_2} \ldots$ and is called (an) accepting (run) iff $\inf(r) \cap F \neq 0$ (Der Final-State wird $\infty$-oft besucht $\rightarrow \{s_2, s_3\} \cup {s_2} \neq 0$)
+\item[\uline{6. Language of TBA}] For a TBA $\mathcal{A}$, the language $\mathcal{L}(\mathcal{A}$ of time wrds it accepts defined to be the set $\{(\sigma, \tau) \vert \mathcal{A}$ has \uline{an} accepting run over $(\sigma, \tau) \}$. For short: $\mathcal{L}(\mathcal{A})$ is the language of $\mathcal{A}$.
+\end{description}
+\end{tcolorbox}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "./HelpSheet"
+%%% End:

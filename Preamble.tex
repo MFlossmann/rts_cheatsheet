@@ -1,0 +1,80 @@
+% Projekt: Real-Time-Systems Formelsammlung
+% Autor: Julian Dinter
+% Datum: 30.01.2018
+% Copyrigth: Julian Dinter
+
+%!TEX root = ./HelpSheet.tex
+
+\documentclass[a4paper, oneside, 6pt, titlepage, numbers=noenddot, DIV = 16]{scrreprt}
+
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes, arrows, positioning, calc, automata}
+
+\usepackage{textcomp}
+\usepackage{stmaryrd}
+\pagestyle{empty}
+
+\newcommand{\dc}[1]{\lceil #1 \rceil}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{cancel}
+\usepackage{ulem}
+
+\usepackage{longtable}
+\renewcommand\arraystretch{1.4}
+\usepackage{booktabs}
+
+\usepackage{listings}
+
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{tabularx}
+
+\usepackage{tcolorbox}
+
+\usepackage{enumitem}
+
+\usepackage{hyperref}
+
+\definecolor{gray}{rgb}{0.4, 0.4, 0.4}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.6}
+\definecolor{cyan}{rgb}{0.0, 0.6, 0.6}
+\definecolor{pink}{rgb}{0.67, 0.05, 0.57}
+\definecolor{red}{rgb}{0.87, 0.2, 0.0}
+\definecolor{green}{rgb}{0.0, 0.47, 0.0}
+\definecolor{violet}{rgb}{0.41, 0.12, 0.61}
+\definecolor{blue}{rgb}{0.0, 0.0, 1.0}
+\definecolor{brown}{rgb}{0.39, 0.22, 0.13}
+\definecolor{kapitelnull}{RGB}{234, 195, 158}
+\definecolor{kapiteleins}{RGB}{227, 234, 158}
+\definecolor{kapitelzwei}{RGB}{184, 236, 159}
+\definecolor{kapiteldrei}{RGB}{166, 153, 232}
+\definecolor{kapitelvier}{RGB}{205, 150, 231}
+
+\newcommand{\zerodisplayskips}{%
+		\setlength{\abovedisplayskip}{2pt}%
+		\setlength{\belowdisplayskip}{2pt}%
+		\setlength{\abovedisplayshortskip}{1pt}%
+		\setlength{\belowdisplayshortskip}{1pt}}
+
+\appto{\normalsize}{\zerodisplayskips}
+\appto{\small}{\zerodisplayskips}
+\appto{\footnotesize}{\zerodisplayskips}
+
+
+\raggedcolumns
+
+\setlist{nolistsep}
+
+\usepackage[landscape, left = 2mm, right = 2mm, top = 2mm, bottom = 2mm]{geometry}
