@@ -53,6 +53,28 @@ $\Rightarrow \mathcal{I} \llbracket \theta \rrbracket \left(\mathcal{V}, [0.5,
 \mathcal{I} \llbracket \hat{\cdot}(x, \int L) \rrbracket\left(\mathcal{V}, [0.5, 3.25]\right) = \hat{\cdot} \, \left(\mathcal{I} \llbracket x \rrbracket\left(\mathcal{V}, [0.5, 3.25]\right), \mathcal{I} \llbracket \int L \rrbracket\left(\mathcal{V}, [0.5, 3.25]\right) \right) = \hat{\cdot} \left( \mathcal{V}(x), \mathcal{I} \llbracket x \rrbracket\left(\mathcal{V}, [0.5, 3.25] \right) \right) = \hat{\cdot} \left( 20, \int_{0.5}^{3.25} L_{\mathcal{I}}(t) \, \mathrm{dt} \right) = \hat{\cdot} \left(20, 1.25\right) = 20 \cdot 1.25 = 25$
 \end{tcolorbox}
 
+\begin{tcolorbox}[colback=kapiteleins!5!white, colframe=red!75!black,
+  title=\textbf{Validity, Realizability, satisfyability}]
+  \begin{description}
+  \item[Holds:] For \textbf{a certain} interpretation,evaluation, in a specific
+    interval\\
+    $\mathcal{I,V},[b,e]\models F \Leftrightarrow
+    \mathcal{I}\llbracket F \rrbracket (\mathcal{V},[b,e])=tt$
+  \item[Satisfies:] For all interpretations and evaluations within a certain
+    interval set\\
+    $\mathcal{I,V}\models F \Leftrightarrow
+    \forall [b,e]\in \mathrm{Intervals}: \mathcal{I,V},[b,e]\models F$
+  \item[Realises:] For a certain Interpretation\\
+    $\mathcal{I}\models F
+    \Leftrightarrow \forall \mathcal{V}\in \mathrm{Valuations}:
+    \mathcal{I,V}\models F$
+  \item[Valid:] \ \\
+    $\models F
+    \Leftrightarrow \forall \mathcal{I}:\mathcal{I}\models F$
+  \end{description}
+  Satisfiable $\Rightarrow$ Realisable $\Rightarrow$ Valid
+\end{tcolorbox}
+
 \begin{tcolorbox}[colback=kapiteleins!5!white, colframe=green!75!black, title=\textbf{Decidability Results for DC}, left=0mm, right=0mm, top=0mm, bottom=0mm]
 \resizebox{0.5\textwidth}{!}{
 \begin{tabular}{l|cc}
@@ -329,7 +351,7 @@ $-$ exponential in number of clocks
 \item[Comitted Locations:] $C \subseteq L$
 \item[Urgend Channels:] $U \subseteq B$
 \item[Set of Datavariables:] $\mathcal{V}$
-\item[Urgend:] Being in this location\,(no time can pass) blocks time passing
+\item[Urgend:] Being in this location\, blocks time passing
 \item[Committed:] Being in this location the next edge must change the committed location
 \item[\uline{1. Data Variables:}] When modelling controllers as timed automata, it is sometimes desirable to have\,(local and shared) non-clock variables. E.g, number of open doors
 \item[\uline{2. Urgent Locations:}] Enforce local immediate progress\,(In $t=0$ time)
