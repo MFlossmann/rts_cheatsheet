@@ -28,7 +28,7 @@
 	\item[3.1 Semantics] $\mathcal{I} \llbracket \theta \rrbracket : \text{Val} \times \text{Intv} \rightarrow \mathbb{R}$\\
 	$\mathcal{I} \llbracket \theta \rrbracket (\mathcal{V}, [b, e])$\\
 	
-	\item[\uline{4. Formulae:}] $ F \Coloneqq p(\theta_1, \ldots, \theta_n \, \vert \, \lnot F_1 \, \vert \, F_1 \land F_2 \, \vert \, \forall x \bullet F_1 \, \vert \, F_1 ; F_ 2 $
+	\item[\uline{4. Formulae:}] $ F \Coloneqq p(\theta_1, \ldots, \theta_n)\, \vert \, \lnot F_1 \, \vert \, F_1 \land F_2 \, \vert \, \forall x \bullet F_1 \, \vert \, F_1 ; F_ 2 $
 	\item[4.1 Semantics:] $\mathcal{I} \llbracket F \rrbracket : \text{Val} \times \text{Intv} \rightarrow \{$tt, ff$\}$\\
 	
 	\item[\uline{5. Abbreviations:}]\begin{flalign*}
@@ -64,7 +64,7 @@ $\Rightarrow \mathcal{I} \llbracket \theta \rrbracket \left(\mathcal{V}, [0.5,
     interval set\\
     $\mathcal{I,V}\models F \Leftrightarrow
     \forall [b,e]\in \mathrm{Intervals}: \mathcal{I,V},[b,e]\models F$
-  \item[Realises:] For a certain Interpretation\\
+  \item[Realises:] For a certain Interpretation and for \textbf{all} intervals\\
     $\mathcal{I}\models F
     \Leftrightarrow \forall \mathcal{V}\in \mathrm{Valuations}:
     \mathcal{I,V}\models F$
@@ -72,7 +72,7 @@ $\Rightarrow \mathcal{I} \llbracket \theta \rrbracket \left(\mathcal{V}, [0.5,
     $\models F
     \Leftrightarrow \forall \mathcal{I}:\mathcal{I}\models F$
   \end{description}
-  Satisfiable $\Rightarrow$ Realisable $\Rightarrow$ Valid
+  Satisfiable $\Leftarrow$ Realisable $\Leftarrow$ Valid
 \end{tcolorbox}
 
 \begin{tcolorbox}[colback=kapiteleins!5!white, colframe=green!75!black, title=\textbf{Decidability Results for DC}, left=0mm, right=0mm, top=0mm, bottom=0mm]
