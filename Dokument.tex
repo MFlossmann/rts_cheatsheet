@@ -185,7 +185,7 @@ A\\B\\C\\D\\E\\F\\HIER NOCH IRGENDWAS ZU DC IMPLEMENTABLES
 \end{description}
 
 \begin{description}
-\item[\uline{1. Clock Constraints:}] $\varphi \Coloneqq x \sim c~|~x - y \sim c~|~\varphi_1 \land \varphi_2$
+\item[\uline{1. Clock Constraints:}] $\varphi \Coloneqq x \sim c~|~x - y \sim c~|~\varphi_1 \land \varphi_2$ $, (\sim \in \{<,><,\ge,\le\})$
 
 \item[\uline{2. Clock Valuations:}] \mbox{$\mathcal{V}: X \rightarrow$ Time, assigning each clock $x \in X$ the current time $\nu(x)$}
 \item[2.1 Time Shift:] $(\nu + t)(x) = \nu(x) + t$\\
@@ -202,7 +202,7 @@ Some Time elapses respecting invariants, locations unchanged
 \item[3.2 Action or Discrete Transition:] \mbox{$\langle \ell, \nu \rangle \xrightarrow{\alpha} \langle \ell', \nu' \rangle$\hfill iff $\nu \models \varphi, \nu' = \nu \left[ Y \coloneqq 0 \right], \nu' \models I(\ell')$}\\
 An Action occurs, location, clocks may change\,/\,reset, time does not elapse
 \item[3.3 Transition Sequences:] $\langle \ell_0, \nu_0 \rangle \xrightarrow{\lambda_1} \langle \ell_1, \nu_1 \rangle \xrightarrow{\lambda_2} \ldots $ with $\langle \ell_0, \nu_0 \rangle \in C_{ini}$\\
-$\lambda \in B \lor \lambda \in$ Time\\[-0.1cm]
+$\lambda \in B \lor \lambda \in$ Time [-0.1cm] (finite or infinite)\\
 \item[\uline{4. Reachability:}] A configuration $\langle \ell, \nu \rangle$ is called reachable\,(in $\mathcal{A}$),\\
 iff there is a transition sequence of the form:\\
 $\langle \ell_0, \nu_0 \rangle \xrightarrow{\lambda_1} \langle \ell_1, \nu_1 \rangle \xrightarrow{\lambda_2} \langle \ell_2, \nu_2 \rangle \xrightarrow{\lambda_3} \ldots \xrightarrow{\lambda_n} \langle \ell_n, \nu_n \rangle = \langle \ell, \nu \rangle$\\[-0.1cm]
@@ -213,8 +213,8 @@ $\langle \ell, \nu \rangle, t \xrightarrow{t'} \langle \ell, \nu + t' \rangle, t
 \item[5.2 Time Stamped Action Transition:] \hfill \\[-0.025cm]
 $\langle \ell, \nu \rangle, t \xrightarrow{\alpha} \langle \ell', \nu' \rangle, t$ \hfill iff $ \alpha \in B_{?!}$ and $ \langle \ell, \nu \rangle, t \xrightarrow{\alpha} \langle \ell', \nu' \rangle$\\
 
-\item[\uline{6. Computation Path:} ($=$Sequence of time-stamped configurations)]\hfill \newline
-$\xi =  \langle \ell_0, \nu_0 \rangle \xrightarrow{\lambda_1} \langle \ell_1, \nu_1 \rangle \xrightarrow{\lambda_2} \ldots$ starting in $\langle \ell_0, \nu_0 \rangle$, with $\langle \ell_0, \nu_0 \rangle \in C_{ini}$
+\item[\uline{6. Computation Path:} ($=$Sequence of time-stamped configurations (infinite/max finite))]\hfill \newline
+$\xi =  \langle \ell_0, \nu_0 \rangle, t_0 \xrightarrow{\lambda_1} \langle \ell_1, \nu_1 \rangle, t_1 \xrightarrow{\lambda_2} \ldots$ starting in $\langle \ell_0, \nu_0 \rangle$, with $\langle \ell_0, \nu_0 \rangle \in C_{ini}$
 
 \item[\uline{7. Time Locks and Zeno-Behaviour:}]\hfill
 \resizebox{5cm}{!}{
@@ -308,13 +308,13 @@ At each configurations uncountably many transitions $\xrightarrow{t}$ may origin
 A location is reachable in $t_{\mathcal{A}} \cdot \mathcal{A}$ \hfill iff $\ell$ is reachable in $\mathcal{A}$\\
 
 \item[\uline{2. Time abstract Transition System $\mathcal{U}(\mathcal{A})$:}] \hfill \newline
-Let $\langle \ell, \nu \rangle, \langle \ell, \nu \rangle \in$ Conf($\mathcal{A})$ be configurations of $\mathcal{A}$ and $\alpha \in B_{?!}$, an action,\\
+Let $\langle \ell, \nu \rangle, \langle \ell', \nu' \rangle \in$ Conf($\mathcal{A})$ be configurations of $\mathcal{A}$ and $\alpha \in B_{?!}$, an action,\\
 \mbox{then $\langle \ell, \nu \rangle \xRightarrow{\alpha} \langle \ell', \nu' \rangle$ iff there exists $t \in$ Time, such that $\langle \ell, \nu \rangle \xrightarrow{t} \circ \xrightarrow{\alpha} \langle \ell', \nu' \rangle$}\\
 
 \item[\uline{3. Region Automaton $\mathcal{R}(\mathcal{A})$:}] \hfill \newline
 Distinguish Clock valuations: if $c_x \geq 1$ then there are $(2 c_x + 2)$ equivalence classes: \hfill $\{\{0\}, (0,1), \{1\}, (1,2), \{2\}, \ldots, \{c_x\}, (c_x, \infty)\}.$\\
 If $\nu_1(x)$ and $\nu_2(x)$ are in the same equivalence class, then $\nu_1$ and $\nu_2$ are indistinguishable by $\mathcal{A}$.\\
-$\mathcal{R}(\mathcal{A}) = $ Conf$\left( \mathcal{R}(\mathcal{A}), B_{?!}, \left\{ \xRightarrow{\alpha}_{\mathcal{R}(\mathcal{A})} \vert \alpha \in B_{?!} \right\}, C_{ini} \right)$\\
+$\mathcal{R}(\mathcal{A}) = \left(\mathrm{Conf} \left( \mathcal{R}(\mathcal{A}))\right(, B_{?!}, \left\{ \xRightarrow{\alpha}_{\mathcal{R}(\mathcal{A})} \vert \alpha \in B_{?!} \right\}, C_{ini} \right)$\\
 where Conf$\left( \mathcal{R}(\mathcal{A}) \right) = \{ \langle \ell, [\nu] \rangle , \ell \in L, \nu : X \rightarrow$ Time, $\nu \models I(\ell)\}$\\
 \mbox{$\alpha \in B_{?!}: \langle \ell, [\nu] \rangle \xRightarrow{\alpha}_{\mathcal{R}(\mathcal{A})} \langle \ell', [\nu'] \rangle$\hfill iff $\langle \ell, \nu \rangle \xRightarrow{\alpha} \langle \ell', \nu' \rangle \hfill \left(\widehat{=} \langle \ell, \nu \rangle \xRightarrow{t} \circ \xRightarrow{\alpha} \langle \ell', \nu' \rangle \right)$}
 
