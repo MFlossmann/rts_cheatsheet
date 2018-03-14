@@ -1,4 +1,4 @@
-#RTS-Help
+# RTS-Help
 Help sheet for the Real Time Systems exam
 
 Feel free to contribute. You may distribute this non-commercially.
